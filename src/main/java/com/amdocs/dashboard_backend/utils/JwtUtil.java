@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class JwtUtil {
     private static final String SECRET_KEY = "vikrant";
-    private static final long expirationTime = 600000;
+    private static final long expirationTime = 3600000;
     public JwtUtil() {}
 
     // Function to generate a JWT token
