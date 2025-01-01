@@ -7,6 +7,7 @@ import org.springframework.data.couchbase.core.mapping.Document;
 public class Admin {
     @Id
     private String empId;
+    private String role="admin";
     private String email;  // Primary Key (in case of Couchbase, it's the document ID)
     private String password;
     private String name;

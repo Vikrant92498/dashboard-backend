@@ -1,10 +1,8 @@
 package com.amdocs.dashboard_backend.controllers;
 
-import com.amdocs.dashboard_backend.models.Admin;
 import com.amdocs.dashboard_backend.models.AdminRes;
-import com.amdocs.dashboard_backend.services.AdminServices;
+import com.amdocs.dashboard_backend.services.interfaces.AdminServices;
 import com.couchbase.client.core.error.DocumentNotFoundException;
-import jdk.jfr.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

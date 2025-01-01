@@ -10,11 +10,11 @@ import java.util.Date;
 
 public class JwtUtil {
     private static final String SECRET_KEY = "vikrant";
-
+    private static final long expirationTime = 600000;
     public JwtUtil() {}
 
     // Function to generate a JWT token
-    public static String generateToken(String email, String role, String name, long expirationTime) {
+    public static String generateToken(String email, String role, String name) {
         return JWT.create()
                 .withSubject(email) // Store the email in the JWT subject claim
                 .withClaim("role", role) // Store the user's role as a custom claim
@@ -70,10 +70,9 @@ public class JwtUtil {
             String email = "vikrant@example.com";
             String role = "admin";
             String name = "Vikrant Sharma";
-            long expirationTime = 600000; // Set expiration time as 10 minutes (in milliseconds)
 
             // Generate a token
-            String token = generateToken(email, role, name, expirationTime);
+            String token = generateToken(email, role, name);
             System.out.println("Generated JWT: " + token);
 
             // Decode and extract information from the token
