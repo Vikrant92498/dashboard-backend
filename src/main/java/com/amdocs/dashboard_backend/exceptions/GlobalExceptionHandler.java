@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
                 "Unauthorized",
                 "Token has expired. Please login again.",
-                "TOKEN_EXPIRED",""
+                "TOKEN_EXPIRED","401"
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }

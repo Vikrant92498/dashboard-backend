@@ -1,8 +1,6 @@
 package com.amdocs.dashboard_backend.repositories.implementations;
 
 import com.amdocs.dashboard_backend.config.CouchbaseConfig;
-import com.amdocs.dashboard_backend.models.response.AdminDetails;
-import com.amdocs.dashboard_backend.models.response.EmployeeDetails;
 import com.amdocs.dashboard_backend.models.response.LoginResponse;
 import com.amdocs.dashboard_backend.repositories.interfaces.AuthRepository;
 import com.amdocs.dashboard_backend.utils.JwtUtil;
@@ -43,11 +41,11 @@ public class AuthRepositoryImpl implements AuthRepository {
             }
 
             // If no matching email found
-            return new LoginResponse<>(false, "Invalid credentials", null, null, null);
+            return new LoginResponse(false, "Invalid credentials", null, null);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new LoginResponse<>(false, "An error occurred: " + e.getMessage(), null, null, null);
+            return new LoginResponse(false, "An error occurred: " + e.getMessage(), null, null);
         }
     }
     private JsonObject queryCollection(Collection collection, String email) {
@@ -68,7 +66,7 @@ public class AuthRepositoryImpl implements AuthRepository {
         String storedPasswordHash = user.getString("password");
         if(!password.equals(storedPasswordHash)){
 
-            return new LoginResponse<>(false, "Invalid credentials", null, null, null);
+            return new LoginResponse(false, "Invalid credentials", null, null);
         }
 //        if (!PasswordUtils.verifyPassword(password, storedPasswordHash)) {
 //            return new LoginResponse<>(false, "Invalid credentials", null, null, null);
@@ -76,23 +74,7 @@ public class AuthRepositoryImpl implements AuthRepository {
 
         // Generate JWT token
         String token = JwtUtil.generateToken(user.getString("email"), user.getString("role"),user.getString("name"));
-        // Create user object based on role
-        Object userDetails;
-        if (role.equals("admin")) {
-            userDetails = new AdminDetails(
-                    user.getString("empId"),
-                    user.getString("email"),
-                    user.getString("name")
-            );
-        } else {
-            userDetails = new EmployeeDetails(
-                    user.getString("empId"),
-                    user.getString("email"),
-                    user.getString("name")
-            );
-        }
-
         // Return LoginResponse
-        return new LoginResponse<>(true, "Login successful", role, token, userDetails);
+        return new LoginResponse(true, "Login successful", role, token);
     }
 }

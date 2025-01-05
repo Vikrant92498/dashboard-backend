@@ -1,6 +1,7 @@
 package com.amdocs.dashboard_backend.controllers;
 
 import com.amdocs.dashboard_backend.models.AdminRes;
+import com.amdocs.dashboard_backend.models.response.AdminDetails;
 import com.amdocs.dashboard_backend.models.response.EmployeeDetails;
 import com.amdocs.dashboard_backend.services.interfaces.AdminServices;
 import com.couchbase.client.core.error.DocumentNotFoundException;
@@ -22,6 +23,11 @@ public class AdminController {
     @GetMapping
     public ResponseEntity<String> getTest() {
         return new ResponseEntity<>("Working", HttpStatus.OK);
+    }
+    @GetMapping("/myDetails")
+    public ResponseEntity<AdminDetails> getMyDetails(@RequestHeader(value = "Authorization") String token){
+        AdminDetails adminDetails = adminService.getMyDetails(token);
+        return ResponseEntity.ok(adminDetails);
     }
 
     @GetMapping("/getEmployees/")

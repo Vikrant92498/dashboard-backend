@@ -26,7 +26,7 @@ public class AuthController {
             String password = loginRequest.get("password");
 
             if (email == null || password == null) {
-                return new ResponseEntity<>(new LoginResponse<>(false, "Email and password are required", null, null, null), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(new LoginResponse(false, "Email and password are required", null, null), HttpStatus.BAD_REQUEST);
             }
 
             // Call the login method from AuthServices
@@ -39,7 +39,7 @@ public class AuthController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(new LoginResponse<>(false, "An error occurred: " + e.getMessage(), null, null, null), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new LoginResponse(false, "An error occurred: " + e.getMessage(), null, null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
